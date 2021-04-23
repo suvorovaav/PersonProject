@@ -1,0 +1,84 @@
+import java.util.StringTokenizer;
+
+public class Address {
+	
+	/**
+	* Доработайте класс адреса, который из полученной строки формата
+	* "Страна[d] Регион[d] Город[d] Улица[d] Дом[d] Корпус[d]
+	* Квартира" ([d] – разделитель, например, «запятая») выбирает
+	* соответствующие части и записывает их в соответствующие поля класса
+	* Address.
+	* Предусмотрите две реализации этого метода:
+	* разделитель – только запятая (использовать метод split());
+	* разделитель – любой из символов ,.;- (класс StringTokenizer).
+	* Необходимо помнить, что в начале и конце разобранной части адреса не
+	* должно быть пробелов. Все поля адреса строковые.
+	* Разработайте проверочный класс не менее чем на четыре адресных
+	* строки.
+	* 
+	*@author Анастасия
+	*/
+	
+	private String country;
+	private String region;
+	private String street;
+	private String house;
+	private String corpus;
+	private String flat;
+	
+	String s;
+	
+	
+	public Address(){
+		
+	}
+	
+	/* Первая реализация метода (разделитель – только запятая)*/
+	public void setAdd1(String s) {
+		int i=0;
+		for (String data: s.split(",", 6)) {
+            switch(i) {
+            case 0:
+            	this.country = data.trim();
+            	break;
+            case 1:
+            	this.region = data.trim();
+            	break;
+            case 2:
+            	this.street = data.trim();
+            	break;
+            case 3:
+            	this.house = data.trim();
+            	break;
+            case 4:
+            	this.corpus = data.trim();
+            	break;
+            case 5:
+            	this.flat = data.trim();
+            	break;
+            }
+            i++;
+        }
+	}
+
+	/* Вторая реализация метода (разделитель – любой из символов ,.;-)*/
+	public void setAdd2(String s) {
+		StringTokenizer st = new StringTokenizer(s, ",.;-");
+		this.country = st.nextToken().trim();    	
+		this.region = st.nextToken().trim();
+		this.street = st.nextToken().trim();
+		this.house = st.nextToken().trim();
+		this.corpus = st.nextToken().trim();
+		this.flat = st.nextToken().trim();
+	}
+
+	/* Метод для проверки и вывода всех полей класса сразу*/
+	public void get() {
+		System.out.println(this.country);
+		System.out.println(this.region);
+		System.out.println(this.street);
+		System.out.println(this.house);
+		System.out.println(this.corpus);
+		System.out.println(this.flat);
+	}
+}
