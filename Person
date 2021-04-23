@@ -1,0 +1,78 @@
+package my_test_project;
+
+ /**
+  * Разработайте класс Person, в котором имеется функция, возвращающая
+  * Фамилию И.О. Функция должна учитывать возможность отсутствия
+  * значений в полях Имя и Отчество. Программу оптимизируйте с точки
+  * зрения быстродействия.
+  * 
+  * @author Анастасия
+  *
+  */
+
+public class Person {
+	private String firstName = null;
+	private String lastName = null;
+	private String patronymic = null;
+
+    /*  Конструкторы */
+	public Person(){
+	}
+
+	/*Если известны и имя, и фамилия, и отчество*/
+	Person(String lastName, String firstName, String patronymic){
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.patronymic = patronymic;
+	}
+	
+	/*Если известны только фамилия и имя 
+	 * В этом лучае результат - Фамилия И.
+	 */
+	Person(String lastName, String firstName){
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
+	/*Только фамилия */
+	Person(String lastName){
+		this.lastName = lastName;
+	}
+	
+//	public String getName() {
+//		if (this.firstName == null) {
+//			return this.lastName;
+//		} else if(this.patronymic == null) {
+//			return this.lastName + " " + this.firstName.substring(0,1) + ".";
+//		} else {
+//			return this.lastName + " " + this.firstName.substring(0,1) + "." + this.patronymic.substring(0,1) + ".";
+//		}
+//	}
+	
+	public String getName() {
+		
+		/*Проверка на количество известных данных*/
+		int i;
+		if (this.firstName == null) {
+			i = 0;
+		} else if(this.patronymic == null) {
+			i = 1;
+		} else {
+			i = 2;
+		}
+		
+		/*Для увеличения быстродействия используется switch*/
+		switch(i) {
+		case 0:
+			return this.lastName;
+		case 1:
+			return this.lastName + " " + this.firstName.substring(0,1) + ".";
+		case 2:
+			return this.lastName + " " + this.firstName.substring(0,1) + "." + this.patronymic.substring(0,1) + ".";
+			default:
+				return this.lastName;
+		}
+	}
+	
+	
+}
