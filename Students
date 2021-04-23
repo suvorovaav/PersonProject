@@ -1,0 +1,30 @@
+/*Создание талицы T_GroupSelected и ее вывод*/
+CREATE TABLE T_GroupSelected(id_Student INT PRIMARY KEY AUTO_INCREMENT,
+firstName VARCHAR(15), lastName VARCHAR(15), id_Group VARCHAR(15));
+INSERT INTO T_GroupSelected VALUES
+(1, 'Emmanuel', 'Macron', 'G1'), 
+(2, 'Angela', 'Merkel', 'G1'), 
+(3, 'Stephen', 'Hawking', 'G2');
+SELECT*FROM T_GroupSelected;
+
+/*Создание талицы T_Student и ее вывод*/
+CREATE TABLE T_Student(id_Student INT PRIMARY KEY AUTO_INCREMENT,
+firstName VARCHAR(15), lastName VARCHAR(15), id_Group VARCHAR(15), dolgCount INT);
+INSERT INTO T_Student VALUES
+(4, 'Jackie', 'Chan', 'G1', 13), 
+(5, 'Boris', 'Jonson', 'G1', 0), 
+(6, 'Elvis', 'Presley', 'G2', 5), 
+(7, 'Hillary', 'Clinton', 'G2', 3), 
+(8, 'Donald', 'Tramp', 'G1', 10), 
+(9, 'Baskin', 'Robbins', 'G2', 0), 
+(10, 'Freddie', 'Mercury', 'G1', 15), 
+(11, 'Joseph', 'Biden', 'G2', 1);
+SELECT*FROM T_Student;
+
+/*G1 – название необходимой группы, 10 – заданное количество долгов.*/
+INSERT INTO T_GroupSelected
+SELECT id_Student, firstName, lastName, id_Group 
+FROM T_Student 
+WHERE id_Group = 'G1' AND dolgCount>10;
+
+SELECT*FROM T_GroupSelected;
